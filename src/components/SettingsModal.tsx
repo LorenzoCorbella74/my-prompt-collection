@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Moon, Save, Sun, X } from 'lucide-react';
-import { AppSettings, LLMConfig } from '../types';
+import { AppSettings } from '../types';
 import { collection, deleteDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase'; // Ensure you have the correct path to your Firebase setup
 

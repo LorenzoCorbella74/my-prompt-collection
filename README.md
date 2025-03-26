@@ -1,5 +1,7 @@
 # My Prompt Library
 
+![app](./doc/app.png)
+
 My Prompt Library is a web application designed to help users manage and organize their collection of prompts. It provides features for creating, editing, testing, and categorizing prompts, making it a powerful tool for prompt-based workflows.
 
 ## Features
@@ -49,9 +51,4 @@ My Prompt Library is a web application designed to help users manage and organiz
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ## Acknowledgments
-- [Firebase](https://firebase.google.com/) for backend services.
-- [Lucide Icons](https://lucide.dev/) for the icon library.
-- [Tailwind CSS](https://tailwindcss.com/) for styling.
-
----
 Feel free to contribute to the project by submitting issues or pull requests!
