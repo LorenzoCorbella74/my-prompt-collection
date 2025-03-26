@@ -1,4 +1,4 @@
-import { Heart, Tag } from 'lucide-react';
+import { Heart, Tag, Cpu } from 'lucide-react'; // Import the Cpu icon for the SYSTEM filter
 import { PromptFilter } from '../types';
 
 interface TagsFilterProps {
@@ -49,6 +49,17 @@ const TagsFilter = ({
         >
           <Heart size={14} className="mr-1.5" fill={activeFilter === PromptFilter.FAVORITES ? "white" : "none"} />
           Favorites
+        </button>
+        <button
+          onClick={() => setActiveFilter(PromptFilter.SYSTEM)}
+          className={`inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium ${
+            activeFilter === PromptFilter.SYSTEM
+              ? 'bg-primary text-white dark:bg-primary-600'
+              : 'bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-primary-600'
+          }`}
+        >
+          <Cpu size={14} className="mr-1.5" />
+          System
         </button>
       </div>
 

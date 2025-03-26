@@ -9,7 +9,8 @@ export interface Prompt {
   createdAt?: number;
   updatedAt?: number;
   author?: string;
-  userId:string
+  userId: string;
+  isSystem?: boolean; // New property to indicate system prompts
 }
 
 export interface LLMConfig {
@@ -28,5 +29,6 @@ export interface AppSettings {
 export enum PromptFilter {
   ALL = 'all',
   TEMPLATES = 'templates',
-  FAVORITES = 'favorites'
+  FAVORITES = 'favorites',
+  SYSTEM = 'system', // New filter for system prompts
 }

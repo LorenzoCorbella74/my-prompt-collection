@@ -22,6 +22,7 @@ const AddEditPromptModal = ({ user, prompt, allTags, onSave, onClose }: AddEditP
   const [newTag, setNewTag] = useState('');
   const [showTagInput, setShowTagInput] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [isSystem, setIsSystem] = useState(false); // New state for isSystem
 
   useEffect(() => {
     if (prompt) {
@@ -32,6 +33,7 @@ const AddEditPromptModal = ({ user, prompt, allTags, onSave, onClose }: AddEditP
       setIsTemplate(prompt.isTemplate);
       setIsFavorite(prompt.isFavorite || false);
       setAuthor(prompt.author || ''); // Imposta l'autore se esiste
+      setIsSystem(prompt.isSystem || false); // Set isSystem if it exists
     }
   }, [prompt]);
 
@@ -47,6 +49,7 @@ const AddEditPromptModal = ({ user, prompt, allTags, onSave, onClose }: AddEditP
       isTemplate,
       isFavorite,
       author: author.trim(), // Salva l'autore
+      isSystem, // Save isSystem
       createdAt: prompt?.createdAt || Date.now(),
       updatedAt: Date.now(),
       userId: user.uid
@@ -242,6 +245,15 @@ const AddEditPromptModal = ({ user, prompt, allTags, onSave, onClose }: AddEditP
                 className="h-4 w-4 text-gray-800 focus:ring-gray-500 border-gray-300 rounded"
               />
               <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Mark as template</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={isSystem}
+                onChange={() => setIsSystem(!isSystem)}
+                className="h-4 w-4 text-gray-800 focus:ring-gray-500 border-gray-300 rounded"
+              />
+              <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Mark as system prompt</span>
             </label>
             <label className="flex items-center">
               <input

@@ -102,7 +102,7 @@ export function App() {
         setPrompts(prompts.map(p => (p.id === currentPrompt.id ? { ...prompt, id: currentPrompt.id } : p)));
       } else {
         // Add new prompt
-        const docRef = await addDoc(collection(db, 'prompts'), { ...prompt, userId: user?.uid }); // Add userId
+        const docRef = await addDoc(collection(db, 'prompts'), { ...prompt, userId: user?.uid }); // Include isSystem
         if (user?.uid) {
           setPrompts([...prompts, { ...prompt, id: docRef.id, userId: user.uid }]);
         } else {
@@ -199,7 +199,8 @@ export function App() {
     const matchesFilter =
       activeFilter === PromptFilter.ALL ||
       (activeFilter === PromptFilter.TEMPLATES && prompt.isTemplate) ||
-      (activeFilter === PromptFilter.FAVORITES && prompt.isFavorite);
+      (activeFilter === PromptFilter.FAVORITES && prompt.isFavorite) ||
+      (activeFilter === PromptFilter.SYSTEM && prompt.isSystem); // Add system filter logic
 
     return matchesSearch && matchesTags && matchesFilter;
   });

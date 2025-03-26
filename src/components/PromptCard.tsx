@@ -19,7 +19,7 @@ const PromptCard = ({
   onTest 
 }: PromptCardProps) => {
   return (
-    <div className={`bg-white border ${prompt.isTemplate ? 'border-gray-400' : 'border-gray-200'} rounded-lg shadow-sm overflow-hidden flex flex-col h-full dark:bg-gray-800 dark:border-gray-700`}>
+    <div className={`p-4 border rounded-md shadow-sm ${prompt.isSystem ? 'bg-green-50' : 'bg-white'} dark:bg-gray-800 dark:border-gray-700`}>
       <div className="p-4 flex-grow">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-medium text-gray-800 line-clamp-1 dark:text-gray-200">{prompt.name}</h3>
