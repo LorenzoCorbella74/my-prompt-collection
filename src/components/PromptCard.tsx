@@ -1,5 +1,6 @@
-import { Bookmark, BookmarkCheck, Heart, Pencil, Trash2, Zap } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Heart, Pencil, Trash2, Zap, Clipboard } from 'lucide-react';
 import { Prompt } from '../types';
+import { copyToClipboard } from '../utils/utils';
 
 interface PromptCardProps {
   prompt: Prompt;
@@ -19,7 +20,7 @@ const PromptCard = ({
   onTest 
 }: PromptCardProps) => {
   return (
-    <div className={`p-4 border rounded-md shadow-sm ${prompt.isSystem ? 'bg-green-50' : 'bg-white'} dark:bg-gray-800 dark:border-gray-700`}>
+    <div className={`p-4 border rounded-md shadow-sm flex flex-col justify-between ${prompt.isSystem ? 'bg-green-50' : 'bg-white'} dark:bg-gray-800 dark:border-gray-700`}>
       <div className="p-4 flex-grow">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-medium text-gray-800 line-clamp-1 dark:text-gray-200">{prompt.name}</h3>
@@ -47,7 +48,14 @@ const PromptCard = ({
         
         <p className="text-gray-600 text-sm mb-4 line-clamp-2 dark:text-gray-400">{prompt.description}</p>
         
-        <div className="bg-gray-50 p-3 rounded-md mb-4 max-h-32 overflow-y-auto dark:bg-gray-700">
+        <div className="relative bg-gray-50 p-3 rounded-md mb-4 max-h-32 overflow-y-auto dark:bg-gray-700">
+          <button 
+            onClick={() => copyToClipboard(prompt.content)}
+            className="absolute top-1 right-1 text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
+            title="Copy content"
+          >
+            <Clipboard size={16} />
+          </button>
           <pre className="text-xs text-gray-700 whitespace-pre-wrap font-mono dark:text-gray-300">{prompt.content}</pre>
         </div>
         

@@ -259,7 +259,7 @@ export function App() {
     <>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900" style={{ fontFamily: "'Inter', sans-serif" }}>
         <header className="border-b border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700">
-          <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">My <span className='text-primary'>PROMPT</span> collection</h1>
               <div className="flex space-x-2">
@@ -289,7 +289,7 @@ export function App() {
           </div>
         </header>
 
-        <main className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+        <main className="max-w-6xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
           <ActionBar
             prompts={prompts}
             setPrompts={setPrompts}

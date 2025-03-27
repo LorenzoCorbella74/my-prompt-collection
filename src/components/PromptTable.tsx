@@ -1,5 +1,6 @@
-import { Bookmark, BookmarkCheck, Heart, Pencil, Trash2, Zap } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Heart, Pencil, Trash2, Zap, Clipboard } from 'lucide-react'; // Add Clipboard import
 import { Prompt } from '../types';
+import { copyToClipboard } from '../utils/utils'; // Import the utility function
 
 interface PromptTableProps {
   prompts: Prompt[];
@@ -85,6 +86,13 @@ const PromptTable = ({
                     ) : (
                       <Bookmark size={18} />
                     )}
+                  </button>
+                  <button 
+                    onClick={() => copyToClipboard(prompt.content)} // Add copy logic
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1"
+                    title="Copy content"
+                  >
+                    <Clipboard size={18} />
                   </button>
                 </div>
               </td>
