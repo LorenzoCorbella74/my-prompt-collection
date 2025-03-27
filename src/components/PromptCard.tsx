@@ -51,7 +51,7 @@ const PromptCard = ({
         <div className="relative bg-gray-50 p-3 rounded-md mb-4 max-h-32 overflow-y-auto dark:bg-gray-700">
           <button 
             onClick={() => copyToClipboard(prompt.content)}
-            className="absolute top-1 right-1 text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
+            className="absolute top-1 right-1 text-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
             title="Copy content"
           >
             <Clipboard size={16} />
