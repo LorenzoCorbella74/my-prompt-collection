@@ -6,10 +6,10 @@ My Prompt Library is a web application designed to help users manage and organiz
 
 ## Features
 
-- **User Authentication**: Secure login/logout with Firebase; private prompt collections for each user.
+- **User Authentication**: Secure login/logout with [Firebase](https://firebase.google.com/); private prompt collections for each user.
 - **Prompt Management**: Add, edit, and delete prompts with details like name, description, content, and tags.
 - **Prompt Categorization**: Use tags, templates, and favorites for organization and quick access.
-- **Prompt Testing**: Test prompts directly within the app using LLM settings.
+- **Prompt Testing**: Test prompts directly within the app using LLM settings ([Ollama](https://www.ollama.com/) as default).
 - **Filters and Search**: Filter by tags, templates, or favorites; search by name or description.
 - **Pagination**: View prompts in paginated form (10, 20, or 50 per page).
 - **View Modes**: Switch between Card View and Table View for displaying prompts.

@@ -14,6 +14,7 @@ const TestPromptModal = ({ prompt, llmConfig, onClose }: TestPromptModalProps) =
   const [error, setError] = useState<string>('');
   const [variables, setVariables] = useState<Record<string, string>>({});
   const [systemPrompt, setSystemPrompt] = useState<string>('You are a helpful assistant.');
+  const [temperature, setTemperature] = useState<number>(0.7); // Default temperature
 
   // Extract variables from the prompt content
   useEffect(() => {
@@ -62,6 +63,9 @@ const TestPromptModal = ({ prompt, llmConfig, onClose }: TestPromptModalProps) =
               { role: 'system', content: systemPrompt },
               { role: 'user', content: content },
             ],
+            options:{
+              temperature, // Include temperature in the request
+            },
             stream: false,
           }),
         });
@@ -78,6 +82,7 @@ const TestPromptModal = ({ prompt, llmConfig, onClose }: TestPromptModalProps) =
               { role: 'system', content: systemPrompt },
               { role: 'user', content: content },
             ],
+            temperature, // Include temperature in the request
             stream: false,
           }),
         });
@@ -95,6 +100,7 @@ const TestPromptModal = ({ prompt, llmConfig, onClose }: TestPromptModalProps) =
               { role: 'system', content: systemPrompt || '' },
               { role: 'user', content: content },
             ],
+            temperature, // Include temperature in the request
             stream: false,
           }),
         });
@@ -122,8 +128,8 @@ const TestPromptModal = ({ prompt, llmConfig, onClose }: TestPromptModalProps) =
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50 dark:bg-gray-900 dark:bg-opacity-80">
       <div className="bg-white rounded-lg shadow-xl overflow-hidden w-full max-w-3xl max-h-[90vh] flex flex-col dark:bg-gray-800">
         <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
-            Test Prompt: {prompt.name}
+          <h2 className=" font-semibold">
+            <span className="text-md text-gray-800 dark:text-gray-200">Test Prompt: </span> <span className="text-xl text-green-700">{prompt.name}</span>
           </h2>
           <button
             onClick={onClose}
@@ -134,24 +140,46 @@ const TestPromptModal = ({ prompt, llmConfig, onClose }: TestPromptModalProps) =
         </div>
 
         <div className="p-4 overflow-y-auto flex-grow">
-          <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">System Prompt</h3>
-            <textarea
-              value={systemPrompt}
-              onChange={(e) => setSystemPrompt(e.target.value)}
-              placeholder="Enter system instructions for the LLM"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              rows={2}
-            />
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            {/* System Prompt Field */}
+            <div className="col-span-2">
+              <h3 className="text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">System Prompt</h3>
+              <textarea
+                value={systemPrompt}
+                onChange={(e) => setSystemPrompt(e.target.value)}
+                placeholder="Enter system instructions for the LLM"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                rows={2}
+              />
+            </div>
+
+            {/* Temperature Slider */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">Temperature</h3>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={temperature}
+                onChange={(e) => setTemperature(parseFloat(e.target.value))}
+                className="w-full accent-primary"
+              />
+              <div className="text-sm text-gray-600 dark:text-gray-400 text-center mt-1">
+                {temperature.toFixed(2)}
+              </div>
+            </div>
           </div>
 
+          {/* Prompt Content Field */}
           <div className="mb-4">
             <h3 className="text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">Prompt Content</h3>
-            <div className="bg-gray-50 p-3 rounded-md mb-2 max-h-48 overflow-y-auto dark:bg-gray-700">
-              <pre className="text-sm text-gray-700 whitespace-pre-wrap font-mono dark:text-gray-300">
-                {prompt.content}
-              </pre>
-            </div>
+            <textarea
+              value={prompt.content}
+              disabled
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 font-mono text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              rows={4}
+            />
           </div>
 
           {/* Variables Section */}

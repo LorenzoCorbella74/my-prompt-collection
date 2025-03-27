@@ -20,9 +20,11 @@ const DEFAULT_SETTINGS: AppSettings = {
   theme: 'light',
   defaultLLM: {
     provider: 'ollama',
-    model: 'llama2',
+    model: 'llama3.2:latest',
   },
-  defaultTags: []
+  defaultTags: [
+    "Code", "Browser", "Search", "Image", "writing", "Music", "Ideas","Fun", "Misc", "Personal", "Work", "Video"
+  ]
 };
 
 export function App() {
@@ -35,7 +37,7 @@ export function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isTestModalOpen, setIsTestModalOpen] = useState(false);
   const [currentPrompt, setCurrentPrompt] = useState<Prompt | null>(null);
-  const [allTags, setAllTags] = useState<string[]>([]);
+  const [allTags, setAllTags] = useState<string[]>(DEFAULT_SETTINGS.defaultTags);
   const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
   const [user, setUser] = useState<User | null>(null);
@@ -61,7 +63,7 @@ export function App() {
 
         // Extract all unique tags from prompts
         const tags = Array.from(new Set(fetchedPrompts.flatMap(prompt => prompt.tags)));
-        setAllTags(tags);
+        setAllTags((defaultTags)=> [...defaultTags, ...tags]);
       } finally {
         setLoading(false);
       }

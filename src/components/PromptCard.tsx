@@ -64,7 +64,7 @@ const PromptCard = ({
             {prompt.tags.map(tag => (
               <span 
                 key={tag} 
-                className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+                className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
               >
                 {tag}
               </span>
