@@ -3,7 +3,7 @@ import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'firebase
 import { db, auth } from './firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import './index.css';
-import { Plus, Settings, LogOut } from 'lucide-react';
+import { Plus, Settings, LogOut, Terminal } from 'lucide-react';
 import PromptCard from './components/PromptCard';
 import PromptTable from './components/PromptTable';
 import AddEditPromptModal from './components/AddEditPromptModal';
@@ -23,7 +23,7 @@ const DEFAULT_SETTINGS: AppSettings = {
     model: 'llama3.2:latest',
   },
   defaultTags: [
-    "Code", "Browser", "Search", "Image", "writing", "Music", "Ideas","Fun", "Misc", "Personal", "Work", "Video"
+    "Code", "Browser", "Search", "Image", "writing", "Music", "Ideas", "Fun", "Misc", "Personal", "Work", "Video"
   ]
 };
 
@@ -63,7 +63,7 @@ export function App() {
 
         // Extract all unique tags from prompts
         const tags = Array.from(new Set(fetchedPrompts.flatMap(prompt => prompt.tags)));
-        setAllTags((defaultTags)=> [...defaultTags, ...tags]);
+        setAllTags((defaultTags) => [...defaultTags, ...tags]);
       } finally {
         setLoading(false);
       }
@@ -263,7 +263,12 @@ export function App() {
         <header className="border-b border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700">
           <div className="max-w-6xl mx-auto px-4 py-3 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center">
-              <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">My <span className='text-primary'>PROMPT</span> collection</h1>
+              <div className="flex justify-between items-center">
+                <span className='text-primary mr-2'><Terminal size={24} /></span>
+                <h1 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+                  My <span className='text-primary'>PROMPT</span> collection
+                </h1>
+              </div>
               <div className="flex space-x-2">
                 <button
                   onClick={handleLogout}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { Terminal } from 'lucide-react';
 
 const Login = ({ onLogin }: { onLogin: () => void }) => {
   const [email, setEmail] = useState('');
@@ -28,13 +29,14 @@ const Login = ({ onLogin }: { onLogin: () => void }) => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-primary to-primary-dark text-gray-800 dark:text-gray-200 relative">
       {/* App Title */}
       <div className="flex flex-col items-center mb-8">
-       {/*  <img
+        {/*  <img
           src="/logo.svg"
           alt="My Prompt Library Logo"
           className="w-16 h-16 mb-4"
         /> */}
-        <h1 className="text-4xl font-bold text-white shadow-md">
-          My Prompt Library
+        <span className="text-white"><Terminal size={120} /></span>
+        <h1 className="text-4xl font-bold text-white">
+          <span >My Prompt Library </span>
         </h1>
       </div>
 
@@ -89,7 +91,7 @@ const Login = ({ onLogin }: { onLogin: () => void }) => {
 
       {/* Watermark */}
       <div className="absolute bottom-4 right-4 text-xs text-gray-500 dark:text-gray-400">
-        Made with love by 
+        Made with love by
         <a
           href="https://github.com/LorenzoCorbella74/my-prompt-collection"
           target="_blank"
