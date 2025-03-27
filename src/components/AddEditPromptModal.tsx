@@ -79,23 +79,10 @@ const AddEditPromptModal = ({ user, prompt, allTags, onSave, onClose }: AddEditP
     setSuggestions([]);
   };
 
-  const removeTag = (tagToRemove: string) => {
-    setTags(tags.filter(tag => tag !== tagToRemove));
-  };
-
   const handleTagKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && newTag.trim()) {
       e.preventDefault();
       addTag(newTag);
-    }
-  };
-
-  const handleAddTag = () => {
-    if (!showTagInput) {
-      setShowTagInput(true);
-    } else if (newTag.trim()) {
-      addTag(newTag);
-      setNewTag('');
     }
   };
 
