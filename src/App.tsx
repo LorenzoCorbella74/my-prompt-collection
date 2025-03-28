@@ -147,6 +147,7 @@ export function App() {
   };
 
   const handleToggleFavorite = async (id: string) => {
+    setLoading(true)
     try {
       const prompt = prompts.find(p => p.id === id);
       if (prompt) {

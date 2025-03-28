@@ -221,7 +221,7 @@ const AddEditPromptModal = ({ user, prompt, allTags, onSave, onClose }: AddEditP
               id="content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 font-mono text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 font-mono text-xs dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               placeholder="Enter the actual prompt text here"
               rows={8}
               required

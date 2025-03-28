@@ -49,13 +49,13 @@ const PromptTable = ({
                 prompt.isSystem ? 'bg-green-50' : 'bg-white'
               } dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700`}
             >
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-3 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{prompt.name}</div>
               </td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-3">
                 <div className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{prompt.description}</div>
               </td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-3">
                 <div className="flex flex-wrap gap-1">
                   {prompt.tags.map(tag => (
                     <span 
@@ -67,7 +67,7 @@ const PromptTable = ({
                   ))}
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-3 whitespace-nowrap">
                 <div className="flex items-center space-x-2">
                   <button 
                     onClick={() => onToggleFavorite(prompt.id)}
@@ -96,7 +96,7 @@ const PromptTable = ({
                   </button>
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <td className="px-6 py-3 whitespace-nowrap text-right text-sm font-medium">
                 <div className="flex items-center justify-end space-x-3">
                   <button
                     onClick={() => onTest(prompt)}

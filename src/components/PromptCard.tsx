@@ -46,7 +46,11 @@ const PromptCard = ({
           </div>
         </div>
         
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2 dark:text-gray-400">{prompt.description}</p>
+        <p className="text-gray-600 text-xs mb-4 dark:text-gray-400 z-10">
+          {prompt.description.length > 60 
+            ? `${prompt.description.slice(0, 60)}...` 
+            : prompt.description}
+        </p>
         
         <div className="relative bg-gray-50 p-3 rounded-md mb-4 max-h-32 overflow-y-auto dark:bg-gray-700">
           <button 
