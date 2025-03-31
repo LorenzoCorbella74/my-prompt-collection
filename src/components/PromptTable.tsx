@@ -9,6 +9,7 @@ interface PromptTableProps {
   onToggleTemplate: (id: string) => void;
   onToggleFavorite: (id: string) => void;
   onTest: (prompt: Prompt) => void;
+  onSortTags: (order: 'asc' | 'desc') => void; // Add onSortTags prop
 }
 
 const PromptTable = ({ 
@@ -17,7 +18,8 @@ const PromptTable = ({
   onDelete, 
   onToggleTemplate, 
   onToggleFavorite,
-  onTest
+  onTest,
+  onSortTags // Add onSortTags prop
 }: PromptTableProps) => {
   return (
     <div className="overflow-x-auto">
@@ -32,6 +34,22 @@ const PromptTable = ({
             </th>
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
               Tags
+              <div className="inline-flex ml-2 space-x-1">
+                <button 
+                  onClick={() => onSortTags('asc')} 
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  title="Sort Ascending"
+                >
+                  ↑
+                </button>
+                <button 
+                  onClick={() => onSortTags('desc')} 
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+                  title="Sort Descending"
+                >
+                  ↓
+                </button>
+              </div>
             </th>
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-300">
               Status
@@ -50,7 +68,12 @@ const PromptTable = ({
               } dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700`}
             >
               <td className="px-6 py-3 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{prompt.name}</div>
+                <div 
+                  className="text-sm font-medium text-gray-900 dark:text-gray-100 cursor-pointer hover:underline"
+                  onClick={() => onEdit(prompt)}
+                >
+                  {prompt.name}
+                </div>
               </td>
               <td className="px-6 py-3">
                 <div className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{prompt.description}</div>

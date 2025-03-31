@@ -23,7 +23,7 @@ const DEFAULT_SETTINGS: AppSettings = {
     model: 'llama3.2:latest',
   },
   defaultTags: [
-    "Code", "Browser", "Search", "Image", "writing", "Music", "Ideas", "Fun", "Misc", "Personal", "Work", "Video"
+    "Code", "Browser", "Search", "Image", "writing", "Music", "Ideas", "Fun", "Misc", "Personal", "Work", "Video", "GameDev"
   ]
 };
 
@@ -42,7 +42,7 @@ export function App() {
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
   const [user, setUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
 
   const { setLoading } = useLoading();
 
@@ -63,7 +63,11 @@ export function App() {
 
         // Extract all unique tags from prompts
         const tags = Array.from(new Set(fetchedPrompts.flatMap(prompt => prompt.tags)));
-        setAllTags((defaultTags) => [...defaultTags, ...tags]);
+
+        setAllTags((defaultTags) => {
+          let s = new Set(defaultTags.concat(tags))
+          return [...s]
+        });
       } finally {
         setLoading(false);
       }
@@ -182,6 +186,15 @@ export function App() {
 
   const toggleViewMode = () => {
     setViewMode(viewMode === 'card' ? 'table' : 'card');
+  };
+
+  const handleSortPrompts = (direction: 'asc' | 'desc') => {
+    const sortedPrompts = [...prompts].sort((a, b) => {
+      const tagA = a.tags.join(', ').toLowerCase();
+      const tagB = b.tags.join(', ').toLowerCase();
+      return direction === 'asc' ? tagA.localeCompare(tagB) : tagB.localeCompare(tagA);
+    });
+    setPrompts(sortedPrompts);
   };
 
   const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -312,10 +325,18 @@ export function App() {
 
           {showFilters && (
             <div className="mb-6 p-4 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:border-gray-700">
-              <div className="flex items-center mb-4">
-                <h3 className="text-lg font-medium text-gray-800 mr-4 dark:text-gray-200">Filters</h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">Filters</h3>
+                <button
+                  onClick={() => {
+                    setActiveFilter(PromptFilter.ALL);
+                    setSelectedTags([]);
+                  }}
+                  className="px-3 py-1.5 text-xs font-semibold font-medium text-gray-700  rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                >
+                  Reset
+                </button>
               </div>
-
               <TagsFilter
                 allTags={allTags}
                 selectedTags={selectedTags}
@@ -350,19 +371,20 @@ export function App() {
                     onTest={() => handleTestPrompt(prompt)}
                   />
                 ))}
-              </div>
-            ) : (
-              <div className="max-h-[70vh] overflow-y-auto">
-                <PromptTable
-                  prompts={paginatedPrompts}
-                  onEdit={handleEditPrompt}
-                  onDelete={handleDeletePrompt}
-                  onToggleTemplate={handleToggleTemplate}
-                  onToggleFavorite={handleToggleFavorite}
-                  onTest={handleTestPrompt}
-                />
-              </div>
-            )
+              </div>)
+              : (
+                <div className="max-h-[70vh] overflow-y-auto">
+                  <PromptTable
+                    prompts={paginatedPrompts}
+                    onEdit={handleEditPrompt}
+                    onDelete={handleDeletePrompt}
+                    onToggleTemplate={handleToggleTemplate}
+                    onToggleFavorite={handleToggleFavorite}
+                    onTest={handleTestPrompt}
+                    onSortTags={(direction) => handleSortPrompts(direction)}
+                  />
+                </div>
+              )
           )}
 
           {/* Pagination Controls */}

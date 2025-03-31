@@ -23,7 +23,12 @@ const PromptCard = ({
     <div className={`p-4 border rounded-md shadow-sm flex flex-col justify-between ${prompt.isSystem ? 'bg-green-50' : 'bg-white'} dark:bg-gray-800 dark:border-gray-700`}>
       <div className="p-4 flex-grow">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-lg font-medium text-gray-800 line-clamp-1 dark:text-gray-200">{prompt.name}</h3>
+          <h3 
+            className="text-lg font-medium text-gray-800 line-clamp-1 dark:text-gray-200 cursor-pointer hover:underline"
+            onClick={onEdit}
+          >
+            {prompt.name}
+          </h3>
           <div className="flex space-x-2">
             <button 
               onClick={onToggleFavorite}
