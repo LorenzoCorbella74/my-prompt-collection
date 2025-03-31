@@ -120,7 +120,7 @@ const AddEditPromptModal = ({ user, prompt, allTags, onSave, onClose }: AddEditP
             </div>
             <div>
               <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">
-                Author
+                Author/Source
               </label>
               <input
                 type="text"

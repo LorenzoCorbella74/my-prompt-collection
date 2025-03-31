@@ -23,7 +23,7 @@ const DEFAULT_SETTINGS: AppSettings = {
     model: 'llama3.2:latest',
   },
   defaultTags: [
-    "Code", "Browser", "Search", "Image", "writing", "Music", "Ideas", "Fun", "Misc", "Personal", "Work", "Video", "GameDev", 'Simple','Complex', 'Reasoning'
+    "Code", "Browser", "Search", "Image", "writing", "Music", "Ideas", "Fun", "Misc", "Personal", "Work", "Video", "GameDev", 'Simple','Complex', 'Reasoning','Brainstorming'
   ]
 };
 
