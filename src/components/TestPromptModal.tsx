@@ -53,7 +53,6 @@ const TestPromptModal = ({ prompt, llmConfig, onClose }: TestPromptModalProps) =
 
       if (llmConfig.provider === 'ollama') {
         response = await fetch('http://localhost:11434/api/chat', {
-          mode:'no-cors',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
